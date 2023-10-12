@@ -49,6 +49,7 @@ def get_author_dict():
         "Balázs Pintér": "https://scholar.google.com/citations?user=f2P5j8YAAAAJ&hl=en/",
         "Ádám Czapp": "https://scholar.google.com/citations?user=vSbbMVEAAAAJ&hl=en",
         "Bálint Gyarmathy": "https://scholar.google.com/citations?user=Ofo9RRcAAAAJ&hl=en",
+        "Daniel Dauner": "https://danieldauner.github.io/",
     }
 
 
@@ -63,7 +64,9 @@ def generate_person_html(
     s = ""
     for p in persons:
         string_part_i = ""
-        for name_part_i in p.get_part("first") + p.get_part("last"):
+        for name_part_i in (
+            p.get_part("first") + p.get_part("middle") + p.get_part("last")
+        ):
             if string_part_i != "":
                 string_part_i += " "
             string_part_i += name_part_i
