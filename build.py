@@ -87,10 +87,12 @@ def get_paper_entry(entry_key, entry):
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
 
+    fields_key = "pdf" if "html" not in entry.fields.keys() else "html"
+
     if "award" in entry.fields.keys():
-        s += f"""<a href="{entry.fields['pdf']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
+        s += f"""<a href="{entry.fields[fields_key]}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
     else:
-        s += f"""<a href="{entry.fields['pdf']}" target="_blank">{entry.fields['title']}</a> <br>"""
+        s += f"""<a href="{entry.fields[fields_key]}" target="_blank">{entry.fields['title']}</a> <br>"""
 
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
