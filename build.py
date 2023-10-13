@@ -45,6 +45,7 @@ def get_author_dict():
     return {
         "Seong Joon Oh": "https://coallaoh.github.io/",
         "Michael Kirchhof": "https://www.linkedin.com/in/michael-kirchhof/",
+        "Elisa Nguyen": "https://elisanguyen.github.io/",
         "Enkelejda Kasneci": "https://www.edu.sot.tum.de/hctl/prof-dr-enkelejda-kasneci/",
         "Balázs Pintér": "https://scholar.google.com/citations?user=f2P5j8YAAAAJ&hl=en/",
         "Ádám Czapp": "https://scholar.google.com/citations?user=vSbbMVEAAAAJ&hl=en",
