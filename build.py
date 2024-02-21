@@ -21,14 +21,6 @@ def get_personal_data():
                     I am currently writing my master's thesis about uncertainty quantification under the supervision of Seong Joon Oh and Michael Kirchhof.
                 </p>
                 <p>For any inquiries, feel free to reach out to me via mail!</p>
-                <p>
-                    <a href="https://bmucsanyi.github.io/assets/pdf/CV_Mucsanyi_Balint.pdf" target="_blank" style="margin-right: 15px"><i class="fa fa-address-card fa-lg"></i> CV</a>
-                    <a href="mailto:{email}" style="margin-right: 15px"><i class="far fa-envelope-open fa-lg"></i> Mail</a>
-                    <a href="https://twitter.com/{twitter}" target="_blank" style="margin-right: 15px"><i class="fab fa-twitter fa-lg"></i> Twitter</a>
-                    <a href="https://scholar.google.com/citations?user=NexA8EEAAAAJ&hl=en" target="_blank" style="margin-right: 15px"><i class="fa-solid fa-book"></i> Scholar</a>
-                    <a href="https://github.com/{github}" target="_blank" style="margin-right: 15px"><i class="fab fa-github fa-lg"></i> Github</a>
-                    <a href="https://www.linkedin.com/in/{linkedin}" target="_blank" style="margin-right: 15px"><i class="fab fa-linkedin fa-lg"></i> LinkedIn</a>
-                </p>
     """
     footer = """
             <div class="col-sm-12" style="">
@@ -38,7 +30,20 @@ def get_personal_data():
                 </p>
             </div>
     """
-    return name, bio_text, footer
+    links_html = f"""
+    <div class='container'>
+        <div class='row justify-content-center'>
+            <div class='col-auto mb-2'><a href='https://bmucsanyi.github.io/assets/pdf/CV_Mucsanyi_Balint.pdf' target='_blank'><i class='fa fa-address-card fa-lg'></i> CV</a></div>
+            <div class='col-auto mb-2'><a href='mailto:{email}'><i class='far fa-envelope-open fa-lg'></i> Mail</a></div>
+            <div class='col-auto mb-2'><a href='https://twitter.com/{twitter}' target='_blank'><i class='fab fa-x-twitter fa-lg'></i> Twitter</a></div>
+            <div class='col-auto mb-2'><a href='https://scholar.google.com/citations?user=NexA8EEAAAAJ&hl=en' target='_blank'><i class='fa-solid fa-book'></i> Scholar</a></div>
+            <div class='col-auto mb-2'><a href='https://github.com/{github}' target='_blank'><i class='fab fa-github fa-lg'></i> Github</a></div>
+            <div class='col-auto mb-2'><a href='https://www.linkedin.com/in/{linkedin}' target='_blank'><i class='fab fa-linkedin fa-lg'></i> LinkedIn</a></div>
+        </div>
+    </div>
+    """
+
+    return name, bio_text, footer, links_html
 
 
 def get_author_dict():
@@ -157,70 +162,64 @@ def get_misc_html():
 def get_index_html():
     pub = get_publications_html()
     misc = get_misc_html()
-    name, bio_text, footer = get_personal_data()
+    name, bio_text, footer, links_html = get_personal_data()
     s = f"""
     <!doctype html>
-<html lang="en">
+    <html lang="en">
+    <head>
+        <!-- Existing meta tags and Bootstrap CSS link -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        </style>
+        <title>{name[0] + ' ' + name[1]}</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    </head>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <title>{name[0] + ' ' + name[1]}</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-</head>
-
-<body>
-    <div class="container">
-        <div class="row" style="margin-top: 3em;">
-            <div class="col-sm-12" style="margin-bottom: 1em;">
-            <h3 class="display-4" style="text-align: center;"><span style="font-weight: bold;">{name[0]}</span> {name[1]}</h3>
+    <body>
+        <div class="container">
+            <div class="row" style="margin-top: 3em;">
+                <div class="col-sm-12" style="margin-bottom: 1em; text-align: center;">
+                    <h3 class="display-4"><span style="font-weight: bold;">{name[0]}</span> {name[1]}</h3>
+                    {links_html}
+                </div>
+                <div class="col-md-7">
+                    {bio_text}
+                </div>
+                <div class="col-md-4 text-center" style="">
+                    <img src="assets/img/profile.jpg" style="width: 100%; max-width: 280px; height: auto; border-radius: 50%;" alt="Profile picture">
+                </div>
             </div>
-            <br>
-            <div class="col-md-8" style="">
-                {bio_text}
+            <div class="row" style="margin-top: 1em;">
+                <div class="col-sm-12" style="">
+                    <h4>Publications</h4>
+                    {pub}
+                </div>
             </div>
-            <div class="col-md-4" style="">
-                <img src="assets/img/profile.jpg" style="width: 280px; height: 280px; border-radius: 50%; border: none; object-fit: cover;" alt="Profile picture">
+            <div class="row" style="margin-top: 3em;">
+                <div class="col-sm-12" style="">
+                    <h4>Miscellaneous</h4>
+                    {misc}
+                </div>
             </div>
-        </div>
-        <div class="row" style="margin-top: 1em;">
-            <div class="col-sm-12" style="">
-                <h4>Publications</h4>
-                {pub}
-            </div>
-        </div>
-        <div class="row" style="margin-top: 3em;">
-            <div class="col-sm-12" style="">
-                <h4>Miscellaneous</h4>
-                {misc}
+            <div class="row" style="margin-top: 3em; margin-bottom: 1em;">
+                {footer}
             </div>
         </div>
-        <div class="row" style="margin-top: 3em; margin-bottom: 1em;">
-            {footer}
-        </div>
-    </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"></script>
-</body>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </body>
 
-</html>
+    </html>
     """
     return s
 
